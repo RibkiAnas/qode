@@ -42,8 +42,8 @@ function LeftSidebar() {
 		<>
 			<button
 				className={cn(
-					"fixed items-center justify-center left-[200px] top-[2.3rem]  p-1 rounded background-light800_dark300 focus:outline-none focus:ring-1 focus:ring-gray-500 z-50 hidden sm:flex",
-					isCollapsed ? "left-[100px]" : ""
+					"fixed items-center justify-center left-[200px] top-[3rem]  p-1 rounded background-light800_dark300 focus:outline-none focus:ring-1 focus:ring-gray-500 z-50 hidden sm:flex",
+					isCollapsed ? "left-[110px]" : ""
 				)}
 				onClick={toggleSidebar}
 			>
@@ -56,11 +56,16 @@ function LeftSidebar() {
 			<div
 				className={cn(
 					"background-light900_dark200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto overflow-x-hidden border-r shadow-light-300 dark:shadow-none max-sm:hidden",
-					isCollapsed ? "w-20" : ""
+					isCollapsed ? "w-24" : ""
 				)}
 			>
-				<div className="px-6 pt-8">
-					<div className="flex items-center gap-1">
+				<div className="px-6 pt-10">
+					<div
+						className={cn(
+							"flex items-center gap-1",
+							isCollapsed ? "justify-center" : ""
+						)}
+					>
 						<Link
 							href="/"
 							className="bg-primary-500 p-1.5 rounded flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-[#e2995f] focus:ring-offset-2 focus:ring-offset-gray-900"
@@ -96,18 +101,18 @@ function LeftSidebar() {
 						</p>
 					</div>
 				</div>
-				<div className="px-6 pt-4">
+				<div className="px-6 pt-7">
 					<hr className="border-gray-700" />
 				</div>
 				<div className="px-6 pt-4 h-full">
-					<ul className="flex flex-col space-y-2">
+					<ul className="flex flex-col gap-6">
 						{sidebarLinks.map((item) => {
 							const isActive =
 								(pathname.includes(item.route) && item.route.length > 1) ||
 								pathname === item.route;
 
 							if (item.route === "/profile") {
-								if (userData?.user._id) {
+								if (userData?.user?._id) {
 									item.route = `${item.route}/${userData?.user._id}`;
 								} else {
 									return null;
@@ -121,7 +126,7 @@ function LeftSidebar() {
 										isActive ? "primary-gradient rounded text-light-900" : ""
 									)}
 								>
-									<div className="absolute inset-y-0 left-0 flex items-center pl-1.5 pointer-events-none">
+									<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 										{item.label === "Home" && <HomeIcon className="w-5 h-5" />}
 										{item.label === "Community" && (
 											<UsersIcon className="w-5 h-5" />
@@ -143,11 +148,13 @@ function LeftSidebar() {
 									<Link
 										href={item.route}
 										className={cn(
-											"inline-block w-full py-2 pl-8 pr-4 text-xs rounded hover:primary-gradient",
-											isCollapsed ? "flex items-center justify-center p-4" : ""
+											"flex items-center justify-start w-full gap-4 p-2 pl-10 text-xs rounded hover:primary-gradient",
+											isCollapsed ? "p-5" : ""
 										)}
 									>
-										<p className={cn("", isCollapsed ? "hidden" : "")}>
+										<p
+											className={cn("base-medium", isCollapsed ? "hidden" : "")}
+										>
 											{item.label}
 										</p>
 									</Link>
