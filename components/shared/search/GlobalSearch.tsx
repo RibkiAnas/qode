@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Input } from "@/components/ui/input";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const GlobalSearch = () => {
 	return (
@@ -19,7 +18,6 @@ const GlobalSearch = () => {
 				<Input
 					type="text"
 					placeholder="Search globally"
-					value={""}
 					onChange={() => {}}
 					className="paragraph-regular no-focus placeholder text-dark400_light700  border-none bg-transparent shadow-none outline-none "
 				/>

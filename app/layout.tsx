@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+// eslint-disable-next-line camelcase
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Provider from "@/components/Provider";
+import React from "react";
 
 const inter = Inter({
 	subsets: ["latin"],

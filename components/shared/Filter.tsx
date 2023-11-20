@@ -9,7 +9,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import Image from "next/image";
 
 interface Props {
 	filters: {

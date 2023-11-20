@@ -44,7 +44,8 @@ const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
 
-/*-------------------------------------*/
+/* ------------------------------------- */
+
 async function signInWithOAuth({ account, profile }) {
 	const user = await User.findOne({ email: profile.email });
 	if (user) {
