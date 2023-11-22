@@ -35,19 +35,17 @@ const AnswersCard = async ({
 	const userData = await getServerSession(authOptions);
 
 	return (
-		<Link
-			href={`/question/${question?._id}/#${_id}`}
-			className="card-wrapper rounded-[10px] px-11 py-9"
-		>
+		<div className="card-wrapper rounded-[10px] px-11 py-9">
 			<div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
-				<>
-					<span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
-						{getTimestamp(createdAt)}
-					</span>
-					<h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
+				<span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
+					{getTimestamp(createdAt)}
+				</span>
+				<h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
+					<Link href={`/question/${question?._id}/#${_id}`}>
 						{question?.title}
-					</h3>
-				</>
+					</Link>
+				</h3>
+
 				{userData ? (
 					<>
 						{showActionButtons && (
@@ -78,7 +76,7 @@ const AnswersCard = async ({
 					/>
 				</div>
 			</div>
-		</Link>
+		</div>
 	);
 };
 

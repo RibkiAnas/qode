@@ -19,10 +19,8 @@ import * as z from "zod";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
 import { useTheme } from "@/context/ThemeProvider";
-import { createQuestion } from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { usePathname, useRouter } from "next/navigation";
-
-const type: any = "create";
 
 interface Props {
 	type?: string;
@@ -30,19 +28,22 @@ interface Props {
 	questionDetails?: string;
 }
 
-function Question({ mongoUserId }: Props) {
+function Question({ type, mongoUserId, questionDetails }: Props) {
 	const editorRef = useRef(null);
 	const { mode } = useTheme();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const router = useRouter();
 	const pathname = usePathname();
+	const parsedQuestionDetails =
+		questionDetails && JSON.parse(questionDetails || "");
+	const groupTags = parsedQuestionDetails?.tags?.map((tag: any) => tag.name);
 
 	const form = useForm<z.infer<typeof QuestionsSchema>>({
 		resolver: zodResolver(QuestionsSchema),
 		defaultValues: {
-			title: "",
-			explanation: "",
-			tags: [],
+			title: parsedQuestionDetails?.title || "",
+			explanation: parsedQuestionDetails?.content || "",
+			tags: groupTags || [],
 		},
 	});
 
@@ -50,15 +51,25 @@ function Question({ mongoUserId }: Props) {
 		setIsSubmitting(true);
 
 		try {
-			await createQuestion({
-				title: values.title,
-				content: values.explanation,
-				tags: values.tags,
-				author: JSON.parse(mongoUserId),
-				path: pathname,
-			});
-
-			router.push("/");
+			if (type === "Edit") {
+				await editQuestion({
+					questionId: parsedQuestionDetails._id,
+					title: values.title,
+					content: values.explanation,
+					path: pathname,
+				});
+				router.push(`/question/${parsedQuestionDetails._id}`);
+			} else {
+				await createQuestion({
+					title: values.title,
+					content: values.explanation,
+					tags: values.tags,
+					author: JSON.parse(mongoUserId),
+					path: pathname,
+				});
+				// navigate to home page
+				router.push("/");
+			}
 		} catch (error) {
 		} finally {
 			setIsSubmitting(false);
@@ -147,7 +158,7 @@ function Question({ mongoUserId }: Props) {
 									}}
 									onBlur={field.onBlur}
 									onEditorChange={(content) => field.onChange(content)}
-									initialValue=""
+									initialValue={parsedQuestionDetails?.content || ""}
 									init={{
 										height: 350,
 										menubar: false,
