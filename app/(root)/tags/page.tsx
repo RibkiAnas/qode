@@ -36,6 +36,9 @@ async function page() {
 										{tag.name}
 									</p>
 								</div>
+								<p className="small-regular text-dark500_light700 mt-4">
+									{tag.description}
+								</p>
 								<p className="small-medium text-dark400_light500 mt-3.5">
 									<span className="body-semibold primary-text-gradient mr-2.5">
 										{tag.questions.length}+
