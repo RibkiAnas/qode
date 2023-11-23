@@ -3,18 +3,22 @@ import QuestionCard from "@/components/cards/QuestionCard";
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
 import { QuestionFilters } from "@/constants/filters";
-import { getSavedQuestion } from "@/lib/actions/user.action";
+import { getSavedQuestion, getUserById } from "@/lib/actions/user.action";
+import { SearchParamsProps } from "@/types";
 import { getServerSession } from "next-auth";
 import React from "react";
 
-async function page() {
+async function page({ searchParams }: SearchParamsProps) {
 	const userData = await getServerSession(authOptions);
-
 	if (!userData?.user) return null;
+
+	const mongoUser = await getUserById({ userId: userData?.user._id });
 
 	const result = await getSavedQuestion({
 		userId: userData?.user._id,
+		filter: searchParams.filter,
 	});
+
 	return (
 		<>
 			<h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
@@ -26,7 +30,7 @@ async function page() {
 				/>
 			</div>
 			<div className="mt-10 flex w-full flex-col gap-6">
-				{result.questions.length > 0 ? (
+				{mongoUser.saved.length > 0 && result.questions.length > 0 ? (
 					result.questions.map((question: any) => (
 						<QuestionCard
 							key={question._id}
