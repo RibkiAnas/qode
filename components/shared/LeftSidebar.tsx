@@ -40,19 +40,19 @@ function LeftSidebar() {
 	};
 	return (
 		<>
-			<button
+			<div
 				className={cn(
-					"fixed items-center justify-center left-[200px] top-[3rem]  p-1 rounded background-light800_dark300 focus:outline-none focus:ring-1 focus:ring-gray-500 z-50 hidden sm:flex",
+					"fixed items-center justify-center left-[200px] top-[3rem]  p-1 rounded background-light800_dark300 focus:outline-none focus:ring-1 cursor-pointer focus:ring-gray-500 z-50 hidden sm:flex",
 					isCollapsed ? "left-[110px]" : ""
 				)}
 				onClick={toggleSidebar}
 			>
 				{isCollapsed ? (
-					<ArrowRightIcon className="w-3 h-3 text-dark400_light700 stroke-current" />
+					<ArrowRightIcon className="text-dark400_light700 h-3 w-3 stroke-current" />
 				) : (
-					<ArrowLeftIcon className="w-3 h-3 text-dark400_light700 stroke-current" />
+					<ArrowLeftIcon className="text-dark400_light700 h-3 w-3 stroke-current" />
 				)}
-			</button>
+			</div>
 			<div
 				className={cn(
 					"background-light900_dark200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto overflow-x-hidden border-r shadow-light-300 dark:shadow-none max-sm:hidden",
@@ -68,10 +68,10 @@ function LeftSidebar() {
 					>
 						<Link
 							href="/"
-							className="bg-primary-500 p-1.5 rounded flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-[#e2995f] focus:ring-offset-2 focus:ring-offset-gray-900"
+							className="flex items-center justify-center rounded bg-primary-500 p-1.5 focus:outline-none focus:ring-1 focus:ring-[#e2995f] focus:ring-offset-2 focus:ring-offset-gray-900"
 						>
 							<svg
-								className="w-5 h-5 text-white stroke-current"
+								className="h-5 w-5 stroke-current text-white"
 								viewBox="0 0 24 24"
 								fill="none"
 							>
@@ -104,7 +104,7 @@ function LeftSidebar() {
 				<div className="px-6 pt-7">
 					<hr className="border-gray-700" />
 				</div>
-				<div className="px-6 pt-4 h-full">
+				<div className="h-full px-6 pt-4">
 					<ul className="flex flex-col gap-6">
 						{sidebarLinks.map((item) => {
 							const isActive =
@@ -126,23 +126,23 @@ function LeftSidebar() {
 										isActive ? "primary-gradient rounded text-light-900" : ""
 									)}
 								>
-									<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-										{item.label === "Home" && <HomeIcon className="w-5 h-5" />}
+									<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+										{item.label === "Home" && <HomeIcon className="h-5 w-5" />}
 										{item.label === "Community" && (
-											<UsersIcon className="w-5 h-5" />
+											<UsersIcon className="h-5 w-5" />
 										)}
 										{item.label === "Collections" && (
-											<StarIcon className="w-5 h-5" />
+											<StarIcon className="h-5 w-5" />
 										)}
 										{item.label === "Find Jobs" && (
-											<Briefcase className="w-5 h-5" />
+											<Briefcase className="h-5 w-5" />
 										)}
-										{item.label === "Tags" && <TagIcon className="w-5 h-5" />}
+										{item.label === "Tags" && <TagIcon className="h-5 w-5" />}
 										{item.label === "Profile" && (
-											<UserIcon className="w-5 h-5" />
+											<UserIcon className="h-5 w-5" />
 										)}
 										{item.label === "Ask a question" && (
-											<HelpCircleIcon className="w-5 h-5" />
+											<HelpCircleIcon className="h-5 w-5" />
 										)}
 									</div>
 									<Link
@@ -164,11 +164,11 @@ function LeftSidebar() {
 					</ul>
 				</div>
 				{userData?.user ? (
-					<div className="pl-6 py-4 background-light900_dark200 flex items-center justify-between">
+					<div className="background-light900_dark200 flex items-center justify-between py-4 pl-6">
 						<div className="flex items-center">
-							<div className="absolute w-8 h-8 z-50 rounded-full before:absolute before:w-2 before:h-2 before:bg-green-500 before:rounded-full before:right-0 before:bottom-0 before:ring-1 before:ring-white"></div>
+							<div className="absolute z-50 h-8 w-8 rounded-full before:absolute before:bottom-0 before:right-0 before:h-2 before:w-2 before:rounded-full before:bg-green-500 before:ring-1 before:ring-white"></div>
 							<Avatar
-								className="w-9 h-9
+								className="h-9 w-9
 								"
 							>
 								<AvatarImage src={userData?.user?.picture} alt="User Image" />
@@ -182,10 +182,10 @@ function LeftSidebar() {
 									isCollapsed ? "hidden" : ""
 								)}
 							>
-								<div className="text-sm text-dark400_light700">
+								<div className="text-dark400_light700 text-sm">
 									{userData?.user?.name}
 								</div>
-								<span className="text-xs text-gray-500 font-light tracking-tight">
+								<span className="text-xs font-light tracking-tight text-gray-500">
 									{userData?.user?.email}
 								</span>
 							</div>
@@ -199,31 +199,31 @@ function LeftSidebar() {
 											isCollapsed ? "hidden" : ""
 										)}
 									>
-										<ChevronsUpDown className="w-4 h-4 stroke-current" />
+										<ChevronsUpDown className="h-4 w-4 stroke-current" />
 									</button>
 								</MenubarTrigger>
 								<MenubarContent className="absolute bottom-0 right-[-13rem] min-w-[120px]  rounded border bg-light-900 py-2 dark:border-dark-400 dark:bg-dark-300">
 									<MenubarItem
-										className="flex cursor-pointer items-center text-gray-500 dark:hover:text-light-900 dark:focus-within:text-light-900 gap-4 px-2.5 py-2  focus:bg-light-800 dark:focus:bg-dark-400"
+										className="flex cursor-pointer items-center gap-4 px-2.5 py-2 text-gray-500 focus:bg-light-800 dark:focus-within:text-light-900  dark:hover:text-light-900 dark:focus:bg-dark-400"
 										inset
 									>
-										<SettingsIcon className="w-5 h-5" />
+										<SettingsIcon className="h-5 w-5" />
 										<Link
 											href={`profile/${userData.user._id}`}
-											className="flex items-center justify-start w-full  text-xs rounded  focus:outline-none focus:ring-1 focus:ring-gray-500 focus:bg-gray-800"
+											className="flex w-full items-center justify-start  rounded text-xs  focus:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
 											onClick={() => signOut()}
 										>
 											Manage account
 										</Link>
 									</MenubarItem>
 									<MenubarItem
-										className="flex cursor-pointer items-center text-gray-500 dark:hover:text-light-900 dark:focus-within:text-light-900
-										gap-4 px-2.5 py-2  focus:bg-light-800 dark:focus:bg-dark-400"
+										className="flex cursor-pointer items-center gap-4 px-2.5 py-2
+										text-gray-500 focus:bg-light-800 dark:focus-within:text-light-900  dark:hover:text-light-900 dark:focus:bg-dark-400"
 										inset
 									>
-										<LogOutIcon className="w-5 h-5" />
+										<LogOutIcon className="h-5 w-5" />
 										<button
-											className="flex items-center justify-start w-full  text-xs rounded  focus:outline-none focus:ring-1 focus:ring-gray-500 focus:bg-gray-800"
+											className="flex w-full items-center justify-start  rounded text-xs  focus:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
 											onClick={() => signOut()}
 										>
 											Sign out
@@ -234,11 +234,11 @@ function LeftSidebar() {
 						</Menubar>
 					</div>
 				) : (
-					<div className="flex flex-col gap-3 p-3 w-full">
+					<div className="flex w-full flex-col gap-3 p-3">
 						<Link href="/sign-in">
 							<Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
 								{isCollapsed ? (
-									<LogInIcon className="w-5 h-5  text-dark400_light700" />
+									<LogInIcon className="text-dark400_light700 h-5  w-5" />
 								) : (
 									<span className="primary-text-gradient">Log In</span>
 								)}

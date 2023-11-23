@@ -16,15 +16,34 @@ import {
 import User from "@/database/user.model";
 import Answer from "@/database/answer.model";
 import Interaction from "@/database/interaction.model";
+import { FilterQuery } from "mongoose";
 
 export async function getQuestions(params: GetQuestionsParams) {
 	try {
 		connectToDatabase();
 
+		const { filter } = params;
+
+		const query: FilterQuery<typeof Question> = {};
+
+		let sortOptions = {};
+
+		switch (filter) {
+			case "newest":
+				sortOptions = { createdAt: -1 };
+				break;
+			case "frequent":
+				sortOptions = { views: -1 };
+				break;
+			case "unanswered":
+				query.answers = { $size: 0 };
+				break;
+		}
+
 		const questions = await Question.find({})
 			.populate({ path: "tags", model: Tag })
 			.populate({ path: "author", model: User })
-			.sort({ createdAt: -1 });
+			.sort(sortOptions);
 
 		return { questions };
 	} catch (error) {
@@ -191,7 +210,7 @@ export async function editQuestion(params: EditQuestionParams) {
 	}
 }
 
-export async function getHotQuestions() {
+export async function getHotQuestions(params: GetQuestionsParams) {
 	try {
 		connectToDatabase();
 
