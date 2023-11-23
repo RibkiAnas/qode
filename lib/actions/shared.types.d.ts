@@ -134,7 +134,7 @@ export interface GetJobsParams {
 }
 
 export interface UpdateUserParams {
-	clerkId: string;
+	authUserId: string;
 	updateData: Partial<IUser>;
 	path: string;
 }

@@ -8,6 +8,7 @@ import {
 	GetUserByIdParams,
 	GetUserStatsParams,
 	ToggleSaveQuestionParams,
+	UpdateUserParams,
 } from "./shared.types";
 import { revalidatePath } from "next/cache";
 import Tag from "@/database/tag.model";
@@ -225,6 +226,21 @@ export async function getUserAnswers(params: GetUserStatsParams) {
 			.populate("author", "_id name picture");
 
 		return { totalAnswers, answers: userAnswers };
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+}
+
+export async function updateUser(params: UpdateUserParams) {
+	try {
+		connectToDatabase();
+
+		const { authUserId, updateData, path } = params;
+
+		await User.findOneAndUpdate({ _id: authUserId }, updateData, { new: true });
+
+		revalidatePath(path);
 	} catch (error) {
 		console.log(error);
 		throw error;
