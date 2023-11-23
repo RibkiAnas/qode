@@ -11,6 +11,7 @@ import {
 	GetQuestionByIdParams,
 	GetQuestionsParams,
 	QuestionVoteParams,
+	RecommendedParams,
 } from "./shared.types";
 import User from "@/database/user.model";
 import Answer from "@/database/answer.model";
@@ -186,6 +187,21 @@ export async function editQuestion(params: EditQuestionParams) {
 		revalidatePath(path);
 	} catch (error) {
 		console.log(error);
+		throw error;
+	}
+}
+
+export async function getHotQuestions() {
+	try {
+		connectToDatabase();
+
+		const hotQuestions = await Question.find({})
+			.sort({ views: -1, upvotes: -1 })
+			.limit(5);
+
+		return hotQuestions;
+	} catch (error) {
+		console.error("Error getting recommended questions:", error);
 		throw error;
 	}
 }
