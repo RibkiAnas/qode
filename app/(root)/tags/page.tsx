@@ -1,19 +1,22 @@
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
-import { UserFilters } from "@/constants/filters";
+import { TagFilters } from "@/constants/filters";
 import { getAllTags } from "@/lib/actions/tag.actions";
+import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 import React from "react";
 
-async function page() {
-	const result = await getAllTags({});
+async function page({ searchParams }: SearchParamsProps) {
+	const result = await getAllTags({
+		filter: searchParams.filter,
+	});
 
 	return (
 		<>
 			<h1 className="h1-bold text-dark100_light900">All Tags</h1>
 			<div className="mt-11 flex justify-end gap-5 max-sm:flex-col sm:items-center">
 				<Filter
-					filters={UserFilters}
+					filters={TagFilters}
 					otherClasses="min-h-[56px] sm:min-w-[170px]"
 					placeholder="Select a Filter"
 				/>
