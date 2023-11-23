@@ -89,7 +89,7 @@ async function page({ params, searchParams }: URLProps) {
 							Top Posts
 						</TabsTrigger>
 						<TabsTrigger value="answers" className="tab">
-							AnswersTab
+							Answers Tab
 						</TabsTrigger>
 					</TabsList>
 					<TabsContent
