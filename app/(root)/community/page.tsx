@@ -2,11 +2,14 @@ import UserCard from "@/components/cards/UserCard";
 import Filter from "@/components/shared/Filter";
 import { UserFilters } from "@/constants/filters";
 import { getAllUsers } from "@/lib/actions/user.action";
+import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 import React from "react";
 
-async function page() {
-	const result = await getAllUsers({});
+async function page({ searchParams }: SearchParamsProps) {
+	const result = await getAllUsers({
+		filter: searchParams.filter,
+	});
 
 	return (
 		<>

@@ -15,7 +15,6 @@ import Tag from "@/database/tag.model";
 import { FilterQuery } from "mongoose";
 import Question from "@/database/question.model";
 import Answer from "@/database/answer.model";
-import { log } from "console";
 
 export async function getUserById(params: any) {
 	try {
@@ -33,9 +32,25 @@ export async function getUserById(params: any) {
 export async function getAllUsers(params: GetAllUsersParams) {
 	try {
 		connectToDatabase();
-		// const { searchQuery, filter, page = 1, pageSize = 10 } = params;
+		const { searchQuery, filter, page = 1, pageSize = 10 } = params;
 
-		const users = await User.find({}).sort({ createdAt: -1 });
+		let sortOptions = {};
+		switch (filter) {
+			case "new_users":
+				sortOptions = { joinedAt: -1 };
+				break;
+			case "old_users":
+				sortOptions = { joinedAt: 1 };
+				break;
+			case "top_contributers":
+				sortOptions = { reputation: -1 };
+				break;
+
+			default:
+				break;
+		}
+
+		const users = await User.find({}).limit(pageSize).sort(sortOptions);
 
 		return { users };
 	} catch (error) {
