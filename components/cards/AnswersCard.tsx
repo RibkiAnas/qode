@@ -4,7 +4,7 @@ import Metric from "../shared/Metric";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import EditDeleteAction from "../shared/EditDeleteAction";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/options";
 // import EditDeleteAction from "../shared/EditDeleteAction";
 
 interface Props {

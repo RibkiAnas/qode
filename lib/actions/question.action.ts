@@ -241,7 +241,7 @@ export async function editQuestion(params: EditQuestionParams) {
 	}
 }
 
-export async function getHotQuestions(params: GetQuestionsParams) {
+export async function getHotQuestions() {
 	try {
 		connectToDatabase();
 

@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/options";
 import QuestionCard from "@/components/cards/QuestionCard";
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
@@ -13,9 +13,11 @@ async function page({ searchParams }: SearchParamsProps) {
 	const userData = await getServerSession(authOptions);
 	if (!userData?.user) return null;
 
+	//	@ts-ignore
 	const mongoUser = await getUserById({ userId: userData?.user._id });
 
 	const result = await getSavedQuestion({
+		//	@ts-ignore
 		userId: userData?.user._id,
 		filter: searchParams.filter,
 		page: searchParams.page ? +searchParams.page : 1,

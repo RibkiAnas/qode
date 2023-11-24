@@ -4,7 +4,7 @@ import React from "react";
 import RenderTag from "../shared/RenderTag";
 import Metric from "../shared/Metric";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/options";
 import EditDeleteAction from "../shared/EditDeleteAction";
 
 interface QuestionProps {

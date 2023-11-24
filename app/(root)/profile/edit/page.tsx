@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/options";
 import Profile from "@/components/forms/Profile";
 import { getUserById } from "@/lib/actions/user.action";
 import { ParamsProps } from "@/types";
@@ -10,6 +10,7 @@ async function page({ params }: ParamsProps) {
 
 	if (!userAuthData || !userAuthData.user) return null;
 
+	//	@ts-ignore
 	const mongoUser = await getUserById({ userId: userAuthData.user._id });
 
 	return (
@@ -17,6 +18,7 @@ async function page({ params }: ParamsProps) {
 			<h1 className="h1-bold text-dark100_light900">Edit Profile</h1>
 			<div className="mt-9">
 				<Profile
+					//	@ts-ignore
 					authUserId={userAuthData.user._id}
 					user={JSON.stringify(mongoUser)}
 				/>

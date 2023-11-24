@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/options";
 import Question from "@/components/forms/Question";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
@@ -10,6 +10,7 @@ async function page({ params }: ParamsProps) {
 	const authUser = await getServerSession(authOptions);
 	if (!authUser) return null;
 
+	//	@ts-ignore
 	const mongoUser = await getUserById({ userId: authUser.user?._id });
 
 	const result = await getQuestionById({ questionId: params.id });

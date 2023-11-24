@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/options";
 import Answer from "@/components/forms/Answer";
 import AllAnswers from "@/components/shared/AllAnswers";
 import Metric from "@/components/shared/Metric";
@@ -18,7 +18,9 @@ async function page({ params, searchParams }: any) {
 	const userData = await getServerSession(authOptions);
 	let mongoUser;
 	if (userData && userData.user) {
+		//	@ts-ignore
 		if (userData.user._id) {
+			//	@ts-ignore
 			mongoUser = await getUserById({ userId: userData.user._id });
 		}
 	}

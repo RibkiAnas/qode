@@ -112,7 +112,9 @@ function LeftSidebar() {
 								pathname === item.route;
 
 							if (item.route === "/profile") {
+								//	@ts-ignore
 								if (userData?.user?._id) {
+									//	@ts-ignore
 									item.route = `${item.route}/${userData?.user._id}`;
 								} else {
 									return null;
@@ -171,7 +173,11 @@ function LeftSidebar() {
 								className="h-9 w-9
 								"
 							>
-								<AvatarImage src={userData?.user?.picture} alt="User Image" />
+								<AvatarImage
+									//	@ts-ignore
+									src={userData?.user?.picture}
+									alt="User Image"
+								/>
 								<AvatarFallback>
 									{userData.user.name?.slice(0, 1)}
 								</AvatarFallback>
@@ -209,6 +215,7 @@ function LeftSidebar() {
 									>
 										<SettingsIcon className="h-5 w-5" />
 										<Link
+											//	@ts-ignore
 											href={`profile/${userData.user._id}`}
 											className="flex w-full items-center justify-start  rounded text-xs  focus:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
 											onClick={() => signOut()}

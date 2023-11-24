@@ -8,7 +8,6 @@ import React from "react";
 async function page({ params, searchParams }: URLProps) {
 	const result = await getQuestionByTagId({
 		tagId: params.id,
-		page: 1,
 		searchQuery: searchParams.q,
 		page: searchParams.page ? +searchParams.page : 1,
 	});

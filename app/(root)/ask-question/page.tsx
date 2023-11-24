@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/options";
 import Question from "@/components/forms/Question";
 import { getUserById } from "@/lib/actions/user.action";
 import { getServerSession } from "next-auth";
@@ -6,11 +6,15 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 async function AskQuestionPage() {
-	const { user } = await getServerSession(authOptions);
+	const userData = await getServerSession(authOptions);
 
-	if (!user._id) redirect("/sign-in");
+	if (!userData) return null;
+	if (!userData.user) return null;
+	//	@ts-ignore
+	if (!userData.user._id) redirect("/sign-in");
 
-	const mongoUser = await getUserById({ userId: user._id });
+	//	@ts-ignore
+	const mongoUser = await getUserById({ userId: userData.user._id });
 
 	return (
 		<div>

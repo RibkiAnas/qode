@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/options";
 import AnswersTab from "@/components/shared/AnswersTab";
 import ProfileLink from "@/components/shared/ProfileLink";
 import QuestionTab from "@/components/shared/QuestionTab";
@@ -66,6 +66,7 @@ async function page({ params, searchParams }: URLProps) {
 				</div>
 				<div className="flex justify-end max-sm:mb-5 max-sm:w-full sm:mt-3">
 					{userData && userData !== undefined && userData.user ? (
+						//	@ts-ignore
 						userData.user._id === userInfo.user._id.toString() ? (
 							<Link href="/profile/edit">
 								<Button className="paragraph-medium btn-secondary text-dark300_light900 min-h-[46px] min-w-[175px] px-4 py-3">
@@ -100,6 +101,7 @@ async function page({ params, searchParams }: URLProps) {
 						<QuestionTab
 							searchParams={searchParams}
 							userId={userInfo.user._id}
+							//	@ts-ignore
 							authUserId={userData?.user._id}
 						/>
 					</TabsContent>
@@ -107,6 +109,7 @@ async function page({ params, searchParams }: URLProps) {
 						<AnswersTab
 							searchParams={searchParams}
 							userId={userInfo.user._id}
+							//	@ts-ignore
 							authUserId={userData?.user._id}
 						/>
 					</TabsContent>
