@@ -15,7 +15,6 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
 import { useTheme } from "@/context/ThemeProvider";
 import { Button } from "../ui/button";
-import Image from "next/image";
 import { createAnswer } from "@/lib/actions/answer.action";
 
 import { usePathname } from "next/navigation";
@@ -29,7 +28,6 @@ interface Props {
 const Answer = ({ question, questionId, authorId }: Props) => {
 	const pathname = usePathname();
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [isSubmittingAI, setIsSubmittingAI] = useState(false);
 	const { mode } = useTheme();
 	const editorRef = useRef(null);
 	const form = useForm<z.infer<typeof AnswerSchema>>({
@@ -96,7 +94,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 					Write your answer here
 				</h4>
 
-				<Button
+				{/* <Button
 					className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-500"
 					onClick={() => {}}
 				>
@@ -114,7 +112,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 							Generate an AI Answer
 						</>
 					)}
-				</Button>
+				</Button> */}
 			</div>
 
 			<Form {...form}>
