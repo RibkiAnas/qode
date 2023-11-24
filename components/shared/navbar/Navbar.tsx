@@ -1,7 +1,7 @@
 import React from "react";
-import GlobalSearch from "../search/GlobalSearch";
 import Theme from "./Theme";
 import MobileNav from "./MobileNav";
+import GlobalSearch from "../search/GlobalSearch";
 
 function Navbar() {
 	return (
