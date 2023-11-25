@@ -25,7 +25,7 @@ const NavContent = () => {
 	const pathname = usePathname();
 	return (
 		<section className="flex h-full flex-col gap-5 pt-16">
-			<ul className="flex flex-col space-y-3 overflow-y-auto h-[70svh] scroll-smooth no-scrollbar p-1">
+			<ul className="no-scrollbar flex h-[70svh] flex-col space-y-3 overflow-y-auto scroll-smooth p-1">
 				{sidebarLinks.map((item) => {
 					const isActive =
 						(pathname.includes(item.route) && item.route.length > 1) ||
@@ -39,22 +39,22 @@ const NavContent = () => {
 										isActive
 											? "primary-gradient rounded text-light-900"
 											: "text-dark300_light900"
-									} flex items-center justify-start gap-4 bg-transparent p-4 rounded`}
+									} flex items-center justify-start gap-4 rounded bg-transparent p-4`}
 								>
-									{item.label === "Home" && <HomeIcon className="w-5 h-5" />}
+									{item.label === "Home" && <HomeIcon className="h-5 w-5" />}
 									{item.label === "Community" && (
-										<UsersIcon className="w-5 h-5" />
+										<UsersIcon className="h-5 w-5" />
 									)}
 									{item.label === "Collections" && (
-										<StarIcon className="w-5 h-5" />
+										<StarIcon className="h-5 w-5" />
 									)}
 									{item.label === "Find Jobs" && (
-										<Briefcase className="w-5 h-5" />
+										<Briefcase className="h-5 w-5" />
 									)}
-									{item.label === "Tags" && <TagIcon className="w-5 h-5" />}
-									{item.label === "Profile" && <UserIcon className="w-5 h-5" />}
+									{item.label === "Tags" && <TagIcon className="h-5 w-5" />}
+									{item.label === "Profile" && <UserIcon className="h-5 w-5" />}
 									{item.label === "Ask a question" && (
-										<HelpCircleIcon className="w-5 h-5" />
+										<HelpCircleIcon className="h-5 w-5" />
 									)}
 									<p className={`${isActive ? "base-bold" : "base-medium"}`}>
 										{item.label}
@@ -89,10 +89,10 @@ const MobileNav = () => {
 				<div className="flex items-center gap-1">
 					<Link
 						href="/"
-						className="bg-primary-500 p-1.5 rounded flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-[#e2995f] focus:ring-offset-2 focus:ring-offset-gray-900"
+						className="flex items-center justify-center rounded bg-primary-500 p-1.5 focus:outline-none focus:ring-1 focus:ring-[#e2995f] focus:ring-offset-2 focus:ring-offset-gray-900"
 					>
 						<svg
-							className="w-6 h-6 text-white stroke-current"
+							className="h-6 w-6 stroke-current text-white"
 							viewBox="0 0 24 24"
 							fill="none"
 						>
@@ -121,7 +121,7 @@ const MobileNav = () => {
 						<NavContent />
 					</SheetClose>
 					{!userData?.user ? (
-						<div className="flex flex-col gap-3 pt-3 absolute bottom-3 w-[85%]">
+						<div className="absolute bottom-3 flex w-[85%] flex-col gap-3 pt-3">
 							<SheetClose asChild>
 								<Link href="/sign-in">
 									<Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">

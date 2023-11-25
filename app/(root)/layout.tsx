@@ -10,7 +10,7 @@ function layout({ children }: { children: React.ReactNode }) {
 				<LeftSidebar />
 				<section className="flex min-h-screen flex-1 flex-col">
 					<Navbar />
-					<div className="mx-auto w-full pt-14 pl-6 pr-[18rem] pb-6 max-md:pb-14 sm:pl-14 max-xl:pr-6">
+					<div className="mx-auto w-full pb-6 pl-6 pr-[18rem] pt-14 max-xl:pr-6 max-md:pb-14 sm:pl-14">
 						{children}
 					</div>
 				</section>
