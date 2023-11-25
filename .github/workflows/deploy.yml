@@ -21,5 +21,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
+          command_timeout: 200m
           key: ${{ secrets.SSHKEY }}
           script: "cd ~/qode && ./.scripts/deploy.sh"
