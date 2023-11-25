@@ -17,12 +17,11 @@ async function page({ params, searchParams }: any) {
 	const result = await getQuestionById({ questionId: params.id });
 	const userData = await getServerSession(authOptions);
 	let mongoUser;
-	if (userData && userData.user) {
+
+	//	@ts-ignore
+	if (userData?.user?._id) {
 		//	@ts-ignore
-		if (userData.user._id) {
-			//	@ts-ignore
-			mongoUser = await getUserById({ userId: userData.user._id });
-		}
+		mongoUser = await getUserById({ userId: userData?.user?._id });
 	}
 
 	return (
@@ -48,11 +47,15 @@ async function page({ params, searchParams }: any) {
 						<Votes
 							type="Question"
 							itemId={JSON.stringify(result._id)}
-							userId={JSON.stringify(mongoUser._id)}
+							userId={mongoUser ? JSON.stringify(mongoUser._id) : ""}
 							upvotes={result.upvotes.length}
-							hasupVoted={result.upvotes.includes(mongoUser._id)}
+							hasupVoted={
+								mongoUser ? result.upvotes.includes(mongoUser._id) : ""
+							}
 							downvotes={result.downvotes.length}
-							hasdownVoted={result.downvotes.includes(mongoUser._id)}
+							hasdownVoted={
+								mongoUser ? result.downvotes.includes(mongoUser._id) : ""
+							}
 							hasSaved={mongoUser?.saved.includes(result._id)}
 						/>
 					</div>
@@ -97,7 +100,7 @@ async function page({ params, searchParams }: any) {
 			</div>
 			<AllAnswers
 				questionId={result._id}
-				userId={mongoUser._id}
+				userId={mongoUser ? mongoUser._id : ""}
 				totalAnswers={result.answers.length}
 				page={searchParams?.page}
 				filter={searchParams?.filter}
@@ -105,7 +108,7 @@ async function page({ params, searchParams }: any) {
 			<Answer
 				question={result.content}
 				questionId={JSON.stringify(result._id)}
-				authorId={JSON.stringify(mongoUser._id)}
+				authorId={mongoUser ? JSON.stringify(mongoUser._id) : ""}
 			/>
 		</>
 	);

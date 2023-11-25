@@ -1,6 +1,7 @@
 import User from "@/database/user.model";
 import { connectToDatabase } from "@/lib/mongoose";
-import { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, Session } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import GitHubProvider from "next-auth/providers/github";
 
 connectToDatabase();
@@ -27,15 +28,22 @@ export const authOptions: NextAuthOptions = {
 		async jwt({ token, trigger, session }) {
 			const user = await getUserByEmail({ email: token.email });
 
-			token.user = user;
+			const newToken = { ...token };
+			if (user?._id) {
+				newToken._id = user._id;
+			}
 
-			return token;
+			// console.log(newToken);
+
+			return newToken;
 		},
-		async session({ session, token }) {
-			//	@ts-ignore
-			session.user = token.user;
+		async session({ session, token }: { session: Session; token: JWT }) {
+			const newSession = { ...session };
+			// @ts-ignore
+			newSession.user._id = token._id; // Cast the token to the custom type
+			// console.log(newSession);
 
-			return session;
+			return newSession;
 		},
 	},
 };
@@ -49,6 +57,7 @@ async function signInWithOAuth({ account, profile }) {
 	}
 	const newUser = new User({
 		name: profile.login,
+		username: profile.login,
 		email: profile.email,
 		picture: profile.avatar_url,
 	});
@@ -60,7 +69,7 @@ async function signInWithOAuth({ account, profile }) {
 
 //	@ts-ignore
 async function getUserByEmail({ email }) {
-	const user = await User.findOne({ email }).select("-select");
+	const user = await User.findOne({ email });
 	if (!user) throw new Error("User does not exist");
 	return { ...user._doc, _id: user._id.toString() };
 }

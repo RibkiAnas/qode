@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import {
 	ArrowLeftIcon,
 	ArrowRightIcon,
-	Briefcase,
 	ChevronsUpDown,
 	HelpCircleIcon,
 	HomeIcon,
@@ -42,7 +41,7 @@ function LeftSidebar() {
 		<>
 			<div
 				className={cn(
-					"fixed items-center justify-center left-[200px] top-[3rem]  p-1 rounded background-light800_dark300 focus:outline-none focus:ring-1 cursor-pointer focus:ring-gray-500 z-50 hidden sm:flex",
+					"fixed items-center justify-center left-[200px] top-[3rem]  p-1 rounded background-light800_dark300 focus:outline-none focus:ring-1 cursor-pointer focus:ring-gray-500 z-50 flex max-sm:hidden",
 					isCollapsed ? "left-[110px]" : ""
 				)}
 				onClick={toggleSidebar}
@@ -136,9 +135,9 @@ function LeftSidebar() {
 										{item.label === "Collections" && (
 											<StarIcon className="h-5 w-5" />
 										)}
-										{item.label === "Find Jobs" && (
+										{/* {item.label === "Find Jobs" && (
 											<Briefcase className="h-5 w-5" />
-										)}
+										)} */}
 										{item.label === "Tags" && <TagIcon className="h-5 w-5" />}
 										{item.label === "Profile" && (
 											<UserIcon className="h-5 w-5" />
@@ -174,8 +173,7 @@ function LeftSidebar() {
 								"
 							>
 								<AvatarImage
-									//	@ts-ignore
-									src={userData?.user?.picture}
+									src={userData?.user?.image || ""}
 									alt="User Image"
 								/>
 								<AvatarFallback>
@@ -216,9 +214,8 @@ function LeftSidebar() {
 										<SettingsIcon className="h-5 w-5" />
 										<Link
 											//	@ts-ignore
-											href={`profile/${userData.user._id}`}
-											className="flex w-full items-center justify-start  rounded text-xs  focus:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
-											onClick={() => signOut()}
+											href={`/profile/${userData.user._id}`}
+											className="flex w-full items-center justify-start  rounded text-xs"
 										>
 											Manage account
 										</Link>
@@ -230,7 +227,7 @@ function LeftSidebar() {
 									>
 										<LogOutIcon className="h-5 w-5" />
 										<button
-											className="flex w-full items-center justify-start  rounded text-xs  focus:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
+											className="flex w-full items-center justify-start  rounded text-xs"
 											onClick={() => signOut()}
 										>
 											Sign out
@@ -241,7 +238,12 @@ function LeftSidebar() {
 						</Menubar>
 					</div>
 				) : (
-					<div className="flex w-full flex-col gap-3 p-3">
+					<div
+						className={cn(
+							"flex  flex-col gap-3 p-3",
+							isCollapsed ? "w-full" : "w-64"
+						)}
+					>
 						<Link href="/sign-in">
 							<Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
 								{isCollapsed ? (

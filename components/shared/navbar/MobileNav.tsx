@@ -13,7 +13,6 @@ import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import {
-	Briefcase,
 	HelpCircleIcon,
 	HomeIcon,
 	StarIcon,
@@ -48,9 +47,9 @@ const NavContent = () => {
 									{item.label === "Collections" && (
 										<StarIcon className="h-5 w-5" />
 									)}
-									{item.label === "Find Jobs" && (
+									{/* {item.label === "Find Jobs" && (
 										<Briefcase className="h-5 w-5" />
-									)}
+									)} */}
 									{item.label === "Tags" && <TagIcon className="h-5 w-5" />}
 									{item.label === "Profile" && <UserIcon className="h-5 w-5" />}
 									{item.label === "Ask a question" && (
