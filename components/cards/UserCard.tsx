@@ -17,25 +17,28 @@ const UserCard = async ({ user }: Props) => {
 	const interactedTags = await getTopInteractedTags({ userId: user._id });
 
 	return (
-		<Link
-			href={`/profile/${user._id}`}
-			className="shadow-light100_darknone w-full max-xs:min-w-full xs:w-[260px]"
-		>
-			<article className="background-light900_dark200 light-border flex w-full flex-col items-center justify-center rounded-2xl border p-8">
-				<Image
-					src={user.picture}
-					alt="user profile picture"
-					width={100}
-					height={100}
-					className="rounded-full"
-				/>
+		<article className="shadow-light100_darknone w-full max-xs:min-w-full xs:w-[260px]">
+			<div className="background-light900_dark200 light-border flex w-full flex-col items-center justify-center rounded-2xl border p-8">
+				<Link href={`/profile/${user._id}`}>
+					<Image
+						src={user.picture}
+						alt="user profile picture"
+						width={100}
+						height={100}
+						className="rounded-full"
+					/>
+				</Link>
 				<div className="mt-4 text-center">
-					<h3 className="h3-bold text-dark200_light900 line-clamp-1">
-						{user.name}
-					</h3>
-					<p className="body-regular text-dark500_light500 mt-2">
-						@{user.username}
-					</p>
+					<Link href={`/profile/${user._id}`}>
+						<h3 className="h3-bold text-dark200_light900 line-clamp-1">
+							{user.name}
+						</h3>
+					</Link>
+					<Link href={`/profile/${user._id}`}>
+						<p className="body-regular text-dark500_light500 mt-2">
+							@{user.username}
+						</p>
+					</Link>
 				</div>
 				<div className="mt-5">
 					{interactedTags.length > 0 ? (
@@ -48,8 +51,8 @@ const UserCard = async ({ user }: Props) => {
 						<Badge>No tags yet</Badge>
 					)}
 				</div>
-			</article>
-		</Link>
+			</div>
+		</article>
 	);
 };
 
