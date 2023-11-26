@@ -8,19 +8,22 @@ on:
   pull_request:
     branches: ["master"]
 
-# Authenticate to the the server via ssh
-# and run our deployment script
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: [self-hosted, qode]
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy to Server
-        uses: appleboy/ssh-action@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          command_timeout: 200m
-          key: ${{ secrets.SSHKEY }}
-          script: "cd ~/qode && ./.scripts/deploy.sh"
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci --legacy-peer-deps
+      - run: npm run build --if-present
+      - run: pm2 restart qode
