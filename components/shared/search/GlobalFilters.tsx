@@ -1,5 +1,4 @@
 "use client";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { GlobalSearchFilters } from "@/constants/filters";
 import { cn, formUrlQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
