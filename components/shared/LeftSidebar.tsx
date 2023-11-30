@@ -18,7 +18,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { sidebarLinks } from "@/constants";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
@@ -28,11 +28,19 @@ import {
 	MenubarMenu,
 	MenubarTrigger,
 } from "../ui/menubar";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "../ui/tooltip";
 
 function LeftSidebar() {
 	const { data: userData } = useSession();
 	const pathname = usePathname();
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+
+	const router = useRouter();
 
 	const toggleSidebar = () => {
 		setIsCollapsed((prev) => !prev);
@@ -146,19 +154,37 @@ function LeftSidebar() {
 											<HelpCircleIcon className="h-5 w-5" />
 										)}
 									</div>
-									<Link
-										href={item.route}
-										className={cn(
-											"flex items-center justify-start w-full gap-4 p-2 pl-10 text-xs rounded hover:primary-gradient",
-											isCollapsed ? "p-5" : ""
-										)}
-									>
-										<p
-											className={cn("base-medium", isCollapsed ? "hidden" : "")}
-										>
-											{item.label}
-										</p>
-									</Link>
+									<TooltipProvider>
+										<Tooltip>
+											<TooltipTrigger asChild>
+												<Link
+													href={item.route}
+													className={cn(
+														"flex items-center justify-start w-full gap-4 p-2 pl-10 text-xs rounded hover:primary-gradient",
+														isCollapsed ? "p-5" : ""
+													)}
+												>
+													<p
+														className={cn(
+															"base-medium",
+															isCollapsed ? "hidden" : ""
+														)}
+													>
+														{item.label}
+													</p>
+												</Link>
+											</TooltipTrigger>
+											<TooltipContent
+												className={cn(
+													"background-light900_dark200 text-dark100_light900",
+													isCollapsed ? "" : "hidden"
+												)}
+												side="left"
+											>
+												<p>{item.label}</p>
+											</TooltipContent>
+										</Tooltip>
+									</TooltipProvider>
 								</li>
 							);
 						})}
@@ -244,15 +270,18 @@ function LeftSidebar() {
 							isCollapsed ? "w-full" : "w-64"
 						)}
 					>
-						<Link href="/sign-in">
-							<Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-								{isCollapsed ? (
-									<LogInIcon className="text-dark400_light700 h-5  w-5" />
-								) : (
-									<span className="primary-text-gradient">Log In</span>
-								)}
-							</Button>
-						</Link>
+						<Button
+							className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none"
+							onClick={() => {
+								if (!userData) router.push("/sign-in?callbackUrl=/");
+							}}
+						>
+							{isCollapsed ? (
+								<LogInIcon className="text-dark400_light700 h-5  w-5" />
+							) : (
+								<span className="primary-text-gradient">Log In</span>
+							)}
+						</Button>
 					</div>
 				)}
 			</div>

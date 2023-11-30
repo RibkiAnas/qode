@@ -57,7 +57,7 @@ function SignPage() {
 								Sign in to your account
 							</h1>
 							<p className="text-muted-foreground text-sm">
-								Enter your email below to sign in
+								Click on Github button below to sign in
 							</p>
 						</div>
 						<UserAuthForm />
