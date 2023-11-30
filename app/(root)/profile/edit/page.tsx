@@ -5,6 +5,7 @@ import { ParamsProps } from "@/types";
 import { getServerSession } from "next-auth";
 import React from "react";
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
 	title: "Edit profile | Qode",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 async function page({ params }: ParamsProps) {
 	const userAuthData = await getServerSession(authOptions);
 
-	if (!userAuthData || !userAuthData.user) return null;
+	if (!userAuthData || !userAuthData.user) return redirect("/");
 
 	//	@ts-ignore
 	const mongoUser = await getUserById({ userId: userAuthData.user._id });
