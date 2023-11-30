@@ -19,7 +19,7 @@ function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 	return (
 		<div className={cn("grid gap-6", className)} {...props}>
 			<Button
-				className="background-light850_dark100 text-dark100_light900"
+				className="background-light850_dark100 text-dark100_light900 ease-in-out"
 				variant="outline"
 				type="button"
 				disabled={isLoading}

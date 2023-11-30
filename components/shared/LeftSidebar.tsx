@@ -62,12 +62,12 @@ function LeftSidebar() {
 			</div>
 			<div
 				className={cn(
-					"background-light900_dark200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto overflow-x-hidden border-r shadow-light-300 dark:shadow-none max-sm:hidden",
+					"background-light900_dark200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto overflow-x-hidden border-r shadow-light-300 dark:shadow-none max-sm:hidden ease-in-out",
 					isCollapsed ? "w-24" : ""
 				)}
 			>
 				<div className="px-6 pt-10">
-					<div
+					{/* <div
 						className={cn(
 							"flex items-center gap-1",
 							isCollapsed ? "justify-center" : ""
@@ -101,6 +101,42 @@ function LeftSidebar() {
 						<p
 							className={cn(
 								"h2-bold  text-dark100_light900 font-spaceGrotesk",
+								isCollapsed ? "hidden" : ""
+							)}
+						>
+							Q<span className="text-primary-500">ode</span>
+						</p>
+					</div> */}
+					<div
+						className={cn(
+							"relative z-20 flex items-center text-lg font-medium",
+							isCollapsed ? "justify-center" : ""
+						)}
+					>
+						<Link
+							href="/"
+							className="flex items-center justify-center rounded bg-primary-500 p-1.5 focus:outline-none focus:ring-1 focus:ring-[#e2995f] focus:ring-offset-2 focus:ring-offset-gray-900"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								className={cn(
+									"text-light-900 h-6 w-6",
+									isCollapsed ? "m-0" : ""
+								)}
+							>
+								<path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
+							</svg>
+						</Link>
+
+						<p
+							className={cn(
+								"h2-bold  text-dark100_light900 font-spaceGrotesk ml-2",
 								isCollapsed ? "hidden" : ""
 							)}
 						>
@@ -223,14 +259,14 @@ function LeftSidebar() {
 						<Menubar className="relative border-none bg-transparent shadow-none">
 							<MenubarMenu>
 								<MenubarTrigger>
-									<button
+									<div
 										className={cn(
-											"text-gray-400 background-light800_dark300 rounded focus:outline-none focus:ring-1 focus:ring-gray-500 dark:focus:text-white",
+											"text-gray-400 background-light800_dark300 rounded focus:outline-none focus:ring-1 cursor-pointer focus:ring-gray-500 dark:focus:text-white",
 											isCollapsed ? "hidden" : ""
 										)}
 									>
 										<ChevronsUpDown className="h-4 w-4 stroke-current" />
-									</button>
+									</div>
 								</MenubarTrigger>
 								<MenubarContent className="absolute bottom-0 right-[-13rem] min-w-[120px]  rounded border bg-light-900 py-2 dark:border-dark-400 dark:bg-dark-300">
 									<MenubarItem
@@ -240,7 +276,8 @@ function LeftSidebar() {
 										<SettingsIcon className="h-5 w-5" />
 										<Link
 											//	@ts-ignore
-											href={`/profile/${userData.user._id}`}
+											// href={`/profile/${userData.user._id}`}
+											href="/profile/edit"
 											className="flex w-full items-center justify-start  rounded text-xs"
 										>
 											Manage account
