@@ -1,7 +1,5 @@
 name: Deploy
 
-# Trigger the workflow on push and
-# pull request events on the master branch
 on:
   push:
     branches: ["master"]
