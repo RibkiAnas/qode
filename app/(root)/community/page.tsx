@@ -6,6 +6,11 @@ import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Community | Qode",
+};
 
 async function page({ searchParams }: SearchParamsProps) {
 	const result = await getAllUsers({

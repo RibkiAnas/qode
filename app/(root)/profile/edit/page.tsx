@@ -4,6 +4,11 @@ import { getUserById } from "@/lib/actions/user.action";
 import { ParamsProps } from "@/types";
 import { getServerSession } from "next-auth";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Edit profile | Qode",
+};
 
 async function page({ params }: ParamsProps) {
 	const userAuthData = await getServerSession(authOptions);

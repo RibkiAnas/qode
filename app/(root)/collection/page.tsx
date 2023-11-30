@@ -8,6 +8,11 @@ import { getSavedQuestion, getUserById } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import { getServerSession } from "next-auth";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Collection | Qode",
+};
 
 async function page({ searchParams }: SearchParamsProps) {
 	const userData = await getServerSession(authOptions);

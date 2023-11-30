@@ -13,6 +13,11 @@ import {
 import { SearchParamsProps } from "@/types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Home | Qode",
+};
 
 async function Home({ searchParams }: SearchParamsProps) {
 	const userAuthData = await getServerSession(authOptions);

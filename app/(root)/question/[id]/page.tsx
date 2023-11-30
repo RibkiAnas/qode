@@ -12,6 +12,11 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Question details | Qode",
+};
 
 async function page({ params, searchParams }: any) {
 	const result = await getQuestionById({ questionId: params.id });

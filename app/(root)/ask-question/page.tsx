@@ -4,6 +4,11 @@ import { getUserById } from "@/lib/actions/user.action";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Ask a question | Qode",
+};
 
 async function AskQuestionPage() {
 	const userData = await getServerSession(authOptions);
