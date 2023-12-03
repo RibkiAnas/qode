@@ -1,13 +1,15 @@
 import React from "react";
-import Theme from "./Theme";
+// import Theme from "./Theme";
 import MobileNav from "./MobileNav";
 import GlobalSearch from "../search/GlobalSearch";
 
 function Navbar() {
 	return (
-		<nav className="flex-between background-light900_dark200 sticky top-0 z-20 w-full gap-5 p-6 shadow-light-300 dark:shadow-none sm:pl-14">
-			<GlobalSearch />
-			<Theme />
+		<nav className="flex-between sticky top-0 z-20 w-full gap-5 bg-dark-200 p-6 dark:shadow-none sm:pl-14">
+			<div className="flex w-full items-center justify-center">
+				<GlobalSearch />
+			</div>
+			{/* <Theme /> */}
 			<MobileNav />
 		</nav>
 	);
