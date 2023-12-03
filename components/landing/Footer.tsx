@@ -1,10 +1,11 @@
 import React from "react";
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "lucide-react";
+import Link from "next/link";
 
 function Footer() {
 	return (
 		<div className=" pt-4 sm:pt-10 lg:pt-12">
-			<footer className="mx-auto max-w-screen-2xl px-4 md:px-8">
+			<footer className="mx-auto max-w-[120rem]  px-4 md:px-8">
 				<div className="flex flex-col items-center justify-between gap-4 border-y border-transparent-white py-6 md:flex-row">
 					{/* nav - start */}
 					<nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 md:justify-start md:gap-6">
@@ -14,6 +15,12 @@ function Footer() {
 						>
 							Features
 						</a>
+						<Link
+							href="/about"
+							className="text-grey transition-colors hover:text-off-white"
+						>
+							About
+						</Link>
 					</nav>
 					{/* nav - end */}
 					{/* social - start */}

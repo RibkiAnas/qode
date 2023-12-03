@@ -62,7 +62,7 @@ function Header() {
 				>
 					<nav
 						className={cn(
-							"fixed flex flex-col top-[var(--navigation-height)] left-0 h-[calc(100vh_-_var(--navigation-height))] w-full overflow-auto transition-opacity duration-500 md:relative md:top-0 md:block md:h-auto md:w-auto md:translate-x-0 md:overflow-hidden bg-transparent md:opacity-100 md:transition-none",
+							"fixed flex flex-col top-[var(--navigation-height)] left-0 h-[calc(100vh_-_var(--navigation-height))] w-full overflow-auto background-light850_dark100 transition-opacity duration-500 md:relative md:top-0 md:block md:h-auto md:w-auto md:translate-x-0 md:overflow-hidden md:bg-transparent md:opacity-100 md:transition-none",
 							hamburgerMenuIsOpen
 								? "translate-x-0 opacity-100 background-light850_dark100"
 								: "translate-x-[-100vw] opacity-0"
@@ -74,7 +74,22 @@ function Header() {
 							)}
 						>
 							<li>
-								<Link href="#features">Features</Link>
+								<Link
+									href="#features"
+									onClick={() => {
+										if (hamburgerMenuIsOpen) setHamburgerMenuIsOpen(false);
+									}}
+								>
+									Features
+								</Link>
+							</li>
+							<li>
+								<Link
+									href="/about"
+									onClick={() => setHamburgerMenuIsOpen(false)}
+								>
+									About
+								</Link>
 							</li>
 						</ul>
 						<div className="flex items-center justify-between p-8 md:hidden">
