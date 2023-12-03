@@ -6,7 +6,7 @@ import React from "react";
 
 function layout({ children }: { children: React.ReactNode }) {
 	return (
-		<main className="background-light850_dark100">
+		<main className="bg-dark-100">
 			<div className="flex">
 				<LeftSidebar />
 				<section className="flex min-h-screen flex-1 flex-col">

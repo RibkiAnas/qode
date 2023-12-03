@@ -8,7 +8,55 @@ body {
 	font-family: "Inter", sans-serif;
 }
 
+@layer base {
+	:root {
+		--navigation-height: 4.8rem;
+	}
+
+	.highlighted-keys .active rect:first-child {
+		fill-opacity: 0.4;
+	}
+
+	.highlighted-keys .active rect:not(:first-child) {
+		stroke-opacity: 1;
+	}
+
+	.highlighted-keys .active path {
+		fill-opacity: 1;
+	}
+}
+
 @layer utilities {
+	.mask-radial-faded {
+		mask-image: radial-gradient(
+			circle at center center,
+			black,
+			transparent 80%
+		);
+	}
+
+	.mask-linear-faded {
+		mask-image: linear-gradient(black, transparent 70%);
+	}
+
+	.mask-keyboard {
+		mask-image: linear-gradient(
+			transparent 0%,
+			rgba(0, 0, 0, 0.57) 33.98%,
+			black 100%
+		);
+	}
+
+	.mask-shortcutkeys {
+		mask-image: linear-gradient(
+			to right,
+			transparent,
+			black 40%,
+			black calc(60%),
+			transparent 100%
+		);
+	}
+
 	.flex-center {
 		@apply flex justify-center items-center;
 	}
@@ -22,23 +70,23 @@ body {
 	}
 
 	.card-wrapper {
-		@apply bg-light-900 dark:dark-gradient shadow-light-100 dark:shadow-dark-100;
+		@apply dark-gradient shadow-dark-100;
 	}
 
 	.btn {
-		@apply bg-light-800 dark:bg-dark-300 !important;
+		@apply bg-dark-300 !important;
 	}
 
 	.btn-secondary {
-		@apply bg-light-800 dark:bg-dark-400 !important;
+		@apply bg-dark-400 !important;
 	}
 
 	.btn-tertiary {
-		@apply bg-light-700 dark:bg-dark-300 !important;
+		@apply bg-dark-300 !important;
 	}
 
 	.markdown {
-		@apply max-w-full prose dark:prose-p:text-light-700 dark:prose-ol:text-light-700 dark:prose-ul:text-light-500 dark:prose-strong:text-white dark:prose-headings:text-white prose-headings:text-dark-400 prose-h1:text-dark-300 prose-h2:text-dark-300 prose-p:text-dark-500 prose-ul:text-dark-500 prose-ol:text-dark-500;
+		@apply max-w-full prose prose-p:text-light-700 prose-ol:text-light-700 prose-ul:text-light-500 prose-strong:text-white prose-headings:text-white;
 	}
 
 	.primary-gradient {
@@ -54,7 +102,7 @@ body {
 	}
 
 	.tab {
-		@apply min-h-full dark:bg-dark-400 bg-light-800 text-light-500 dark:data-[state=active]:bg-dark-300 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-500 !important;
+		@apply min-h-full bg-dark-400 text-light-500 data-[state=active]:bg-dark-300 data-[state=active]:text-primary-500 !important;
 	}
 
 	@variants responsive {

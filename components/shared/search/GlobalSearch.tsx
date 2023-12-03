@@ -59,7 +59,7 @@ const GlobalSearch = () => {
 	}, [search, router, pathname, searchParams, query]);
 	return (
 		<div ref={searchContainerRef} className="relative w-full max-w-[600px]">
-			<div className="background-light800_darkgradient relative flex min-h-[56px] grow items-center gap-1 rounded-xl px-4">
+			<div className="dark-gradient relative flex min-h-[56px] grow items-center gap-1 rounded-xl px-4">
 				<Image
 					src="/assets/icons/search.svg"
 					alt="search"

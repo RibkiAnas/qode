@@ -34,7 +34,15 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+			<head>
+				<meta
+					name="viewport"
+					content="width=device-width, height=device-height, initial-scale=1"
+				/>
+			</head>
+			<body
+				className={`scroll-smooth ${inter.variable} ${spaceGrotesk.variable}`}
+			>
 				<Provider>{children}</Provider>
 			</body>
 		</html>

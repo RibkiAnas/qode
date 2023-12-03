@@ -34,6 +34,8 @@ import {
 } from "@/components/ui/menubar";
 const NavContent = () => {
 	const pathname = usePathname();
+	const { data: userData } = useSession();
+
 	return (
 		<section className="flex h-full flex-col gap-5 pt-16">
 			<ul className="no-scrollbar flex h-[70svh] flex-col space-y-3 overflow-y-auto scroll-smooth p-1">
@@ -41,6 +43,16 @@ const NavContent = () => {
 					const isActive =
 						(pathname.includes(item.route) && item.route.length > 1) ||
 						pathname === item.route;
+
+					if (item.route === "/profile") {
+						//	@ts-ignore
+						if (userData?.user?._id) {
+							//	@ts-ignore
+							item.route = `${item.route}/${userData?.user._id}`;
+						} else {
+							return null;
+						}
+					}
 					return (
 						<SheetClose asChild key={item.route}>
 							<li className="relative">
@@ -91,13 +103,10 @@ const MobileNav = () => {
 					alt="menu"
 					width={36}
 					height={36}
-					className="invert-colors sm:hidden"
+					className="sm:hidden"
 				/>
 			</SheetTrigger>
-			<SheetContent
-				side="left"
-				className="background-light900_dark200 border-none"
-			>
+			<SheetContent side="left" className="border-none bg-dark-200">
 				<div
 					className={cn("relative z-20 flex items-center text-lg font-medium")}
 				>

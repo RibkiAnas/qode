@@ -49,64 +49,24 @@ function LeftSidebar() {
 		<>
 			<div
 				className={cn(
-					"fixed items-center justify-center left-[200px] top-[3rem]  p-1 rounded background-light800_dark300 focus:outline-none focus:ring-1 cursor-pointer focus:ring-gray-500 z-50 flex max-sm:hidden",
+					"fixed items-center justify-center left-[200px] top-[3rem]  p-1 rounded bg-dark-300 focus:outline-none focus:ring-1 cursor-pointer focus:ring-gray-500 z-50 flex max-sm:hidden",
 					isCollapsed ? "left-[110px]" : ""
 				)}
 				onClick={toggleSidebar}
 			>
 				{isCollapsed ? (
-					<ArrowRightIcon className="text-dark400_light700 h-3 w-3 stroke-current" />
+					<ArrowRightIcon className="h-3 w-3 stroke-current text-light-700" />
 				) : (
-					<ArrowLeftIcon className="text-dark400_light700 h-3 w-3 stroke-current" />
+					<ArrowLeftIcon className="h-3 w-3 stroke-current text-light-700" />
 				)}
 			</div>
 			<div
 				className={cn(
-					"background-light900_dark200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto overflow-x-hidden border-r shadow-light-300 dark:shadow-none max-sm:hidden ease-in-out",
+					"bg-dark-200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto overflow-x-hidden border-r shadow-light-300 dark:shadow-none max-sm:hidden ease-in-out",
 					isCollapsed ? "w-24" : ""
 				)}
 			>
 				<div className="px-6 pt-10">
-					{/* <div
-						className={cn(
-							"flex items-center gap-1",
-							isCollapsed ? "justify-center" : ""
-						)}
-					>
-						<Link
-							href="/"
-							className="flex items-center justify-center rounded bg-primary-500 p-1.5 focus:outline-none focus:ring-1 focus:ring-[#e2995f] focus:ring-offset-2 focus:ring-offset-gray-900"
-						>
-							<svg
-								className="h-5 w-5 stroke-current text-white"
-								viewBox="0 0 24 24"
-								fill="none"
-							>
-								<path
-									d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z"
-									stroke="currentColor"
-									strokeWidth="1.5"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-								<path
-									d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6722 12"
-									stroke="currentColor"
-									strokeWidth="1.5"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</svg>
-						</Link>
-						<p
-							className={cn(
-								"h2-bold  text-dark100_light900 font-spaceGrotesk",
-								isCollapsed ? "hidden" : ""
-							)}
-						>
-							Q<span className="text-primary-500">ode</span>
-						</p>
-					</div> */}
 					<div
 						className={cn(
 							"relative z-20 flex items-center text-lg font-medium",
@@ -115,7 +75,7 @@ function LeftSidebar() {
 					>
 						<Link
 							href="/"
-							className="flex items-center justify-center rounded bg-primary-500 p-1.5 focus:outline-none focus:ring-1 focus:ring-[#e2995f] focus:ring-offset-2 focus:ring-offset-gray-900"
+							className="flex items-center justify-center rounded bg-primary-500 p-1.5 "
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +96,7 @@ function LeftSidebar() {
 
 						<p
 							className={cn(
-								"h2-bold  text-dark100_light900 font-spaceGrotesk ml-2",
+								"h2-bold  text-light-900 font-spaceGrotesk ml-2",
 								isCollapsed ? "hidden" : ""
 							)}
 						>
@@ -212,7 +172,7 @@ function LeftSidebar() {
 											</TooltipTrigger>
 											<TooltipContent
 												className={cn(
-													"background-light900_dark200 text-dark100_light900",
+													"bg-dark-200 text-dark100_light900",
 													isCollapsed ? "" : "hidden"
 												)}
 												side="left"
@@ -227,7 +187,7 @@ function LeftSidebar() {
 					</ul>
 				</div>
 				{userData?.user ? (
-					<div className="background-light900_dark200 flex items-center justify-between py-4 pl-6">
+					<div className="flex items-center justify-between bg-dark-200 py-4 pl-6">
 						<div className="flex items-center">
 							<div className="absolute z-50 h-8 w-8 rounded-full before:absolute before:bottom-0 before:right-0 before:h-2 before:w-2 before:rounded-full before:bg-green-500 before:ring-1 before:ring-white"></div>
 							<Avatar
@@ -248,7 +208,7 @@ function LeftSidebar() {
 									isCollapsed ? "hidden" : ""
 								)}
 							>
-								<div className="text-dark400_light700 text-sm">
+								<div className="text-sm text-light-700">
 									{userData?.user?.name}
 								</div>
 								<span className="text-xs font-light tracking-tight text-gray-500">
@@ -261,7 +221,7 @@ function LeftSidebar() {
 								<MenubarTrigger>
 									<div
 										className={cn(
-											"text-gray-400 background-light800_dark300 rounded focus:outline-none focus:ring-1 cursor-pointer focus:ring-gray-500 dark:focus:text-white",
+											"text-gray-400 bg-dark-300 rounded focus:outline-none focus:ring-1 cursor-pointer focus:ring-gray-500 dark:focus:text-white",
 											isCollapsed ? "hidden" : ""
 										)}
 									>
@@ -310,11 +270,11 @@ function LeftSidebar() {
 						<Button
 							className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none"
 							onClick={() => {
-								if (!userData) router.push("/sign-in?callbackUrl=/");
+								if (!userData) router.push("/sign-in?callbackUrl=/app");
 							}}
 						>
 							{isCollapsed ? (
-								<LogInIcon className="text-dark400_light700 h-5  w-5" />
+								<LogInIcon className="h-5 w-5  text-light-700" />
 							) : (
 								<span className="primary-text-gradient">Log In</span>
 							)}

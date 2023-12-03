@@ -127,7 +127,7 @@ function Question({ type, mongoUserId, questionDetails }: Props) {
 							</FormLabel>
 							<FormControl className="mt-3.5">
 								<Input
-									className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+									className="no-focus paragraph-regular light-border-2 min-h-[56px] border bg-dark-300 text-light-700"
 									{...field}
 								/>
 							</FormControl>
@@ -210,7 +210,7 @@ function Question({ type, mongoUserId, questionDetails }: Props) {
 								<>
 									<Input
 										disabled={type === "Edit"}
-										className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
+										className="no-focus paragraph-regular light-border-2 min-h-[56px] border bg-dark-300 text-light-700"
 										placeholder="Add tags..."
 										onKeyDown={(e) => handleInputKeyDown(e, field)}
 									/>
@@ -220,7 +220,7 @@ function Question({ type, mongoUserId, questionDetails }: Props) {
 											{field.value.map((tag: any) => (
 												<Badge
 													key={tag}
-													className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
+													className="subtle-medium flex items-center justify-center gap-2 rounded-md border-none bg-dark-300 px-4 py-2 capitalize text-light-500"
 													onClick={() =>
 														type !== "Edit"
 															? handleTagRemove(tag, field)
