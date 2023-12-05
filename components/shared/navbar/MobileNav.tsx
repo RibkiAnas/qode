@@ -146,7 +146,7 @@ const MobileNav = () => {
 								<Button
 									className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none"
 									onClick={() => {
-										if (!userData) router.push("/sign-in?callbackUrl=/");
+										if (!userData) router.push("/sign-in?callbackUrl=/app");
 									}}
 								>
 									<span className="primary-text-gradient">Log In</span>
