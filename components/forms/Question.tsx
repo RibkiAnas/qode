@@ -68,7 +68,7 @@ function Question({ type, mongoUserId, questionDetails }: Props) {
 					path: pathname,
 				});
 				// navigate to home page
-				router.push("/");
+				router.push("/app");
 			}
 		} catch (error) {
 		} finally {
