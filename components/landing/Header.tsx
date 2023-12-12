@@ -75,7 +75,7 @@ function Header() {
 						>
 							<li>
 								<Link
-									href="#features"
+									href="/#features"
 									onClick={() => {
 										if (hamburgerMenuIsOpen) setHamburgerMenuIsOpen(false);
 									}}
@@ -85,7 +85,7 @@ function Header() {
 							</li>
 							<li>
 								<Link
-									href="/about"
+									href="about"
 									onClick={() => setHamburgerMenuIsOpen(false)}
 								>
 									About
